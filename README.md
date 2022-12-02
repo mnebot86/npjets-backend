@@ -45,6 +45,8 @@ Using node, express and mongodb to manage data. Storing coaches, players, sub-te
 
 ## Permission Planning
 
+![PermissionChart drawio](https://user-images.githubusercontent.com/85528188/205220322-a413e33b-1abc-437e-92cd-01d2562e138b.png)
+
 ## Local Development
 
 `Node` and `yarn` is required to run
