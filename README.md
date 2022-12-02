@@ -39,6 +39,12 @@ Using node, express and mongodb to manage data. Storing coaches, players, sub-te
 -   Git projects task board
 -   draw.io
 
+## Models ERD
+
+![ERD](https://user-images.githubusercontent.com/85528188/205213245-01a2af94-4ba7-4c55-a283-d1ca75930629.png)
+
+## Permission Planning
+
 ## Local Development
 
 `Node` and `yarn` is required to run
@@ -46,7 +52,3 @@ Using node, express and mongodb to manage data. Storing coaches, players, sub-te
 1. Git Clone Repo
 1. In root directory run `yarn install`
 1. To start development run `yarn start`
-
-## Models ERD
-
-![ERD](https://user-images.githubusercontent.com/85528188/205213245-01a2af94-4ba7-4c55-a283-d1ca75930629.png)
