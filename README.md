@@ -15,16 +15,24 @@ Using node, express and mongodb to manage data. Storing coaches, players, sub-te
 -   Crud on Games
 -   Crud Chat Room & Messages
 
-## Technologies
+## Technologies and Dependencies
 
--   Node.js
--   Express.js
--   Mongoose
--   MongoDB
--   Graphql
--   Jest
--   SuperTest
+-   node.js
+-   express.js
+-   mongoose
+-   mongoDB
+-   graphql
+-   jest
+-   superTest
 -   eslint
+-   bcryptjs
+-   cors
+-   dotenv
+-   express-async-errors
+-   http-status-codes
+-   jsonwebtoken
+-   validator
+-   morgan
 
 ## Tools
 
@@ -41,4 +49,4 @@ Using node, express and mongodb to manage data. Storing coaches, players, sub-te
 
 ## Models ERD
 
-![Alt text](/ERD.png 'Models with relations')
+![ERD](https://user-images.githubusercontent.com/85528188/205213245-01a2af94-4ba7-4c55-a283-d1ca75930629.png)
