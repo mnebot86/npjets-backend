@@ -10,7 +10,7 @@
          "node": true
     },
     "rules": {
-         "no-console": "error",
+         "no-console": "off",
          "semi": ["error", "always"],
 		"object-curly-spacing": ["error", "always"],
 		"quotes": ["error", "single"],
@@ -26,7 +26,6 @@
 			{ "blankLine": "always", "prev": "*", "next": "break" },
 			{ "blankLine": "always", "prev": "*", "next": "block-like" }
 		],
-		"no-unused-vars": "warn",
-		"import/no-cycle": "warn"
+		"no-unused-vars": "warn"
     }
 }
