@@ -1,6 +1,8 @@
 import express from 'express';
+import { graphqlHTTP } from 'express-graphql';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
+import cors from 'cors';
 import 'express-async-errors';
 
 dotenv.config();
@@ -16,14 +18,16 @@ const mongoString =
 //db and authenticateUser
 import connectDB from './db/connect.js';
 
-//routers
+//Graphql
+import rootResolver from './graphql/resolvers/index.js';
+import schemaBuild from './graphql/schema/index.js';
 
 //Middleware
-
 if (process.env.NODE_ENV !== 'production') {
 	app.use(morgan('dev'));
 }
 
+app.use(cors());
 app.use(express.json());
 
 //Routes
@@ -32,6 +36,15 @@ app.get('/api/v1', (req, res) => {
 		msg: 'API is running',
 	});
 });
+
+app.use(
+	'/graphql',
+	graphqlHTTP({
+		schema: schemaBuild,
+		rootValue: rootResolver,
+		graphiql: true,
+	})
+);
 
 const start = async () => {
 	try {
