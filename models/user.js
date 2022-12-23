@@ -16,6 +16,10 @@ const userSchema = new Schema(
 			enum: ['Admin', 'Coach', 'TeamMom', 'Parent', 'Player'],
 			default: 'Player',
 		},
+		role: {
+			type: mongoose.Types.ObjectId,
+			refPath: 'roleType',
+		},
 	},
 	{ timestamps: true }
 );
