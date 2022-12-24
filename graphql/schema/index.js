@@ -1,6 +1,38 @@
 import { buildSchema } from 'graphql';
+//TODO: add rosterSize to type Group
 
 const schemaBuild = buildSchema(`
+    type Group {
+        _id: ID!
+        name: String!
+        coaches: [Coach]!
+        ageAllowance: Int!
+        wins: Int!
+        loses: Int!
+        draws: Int!
+        ranking: Int
+        isInPlayoff: Boolean
+        isArchive: Boolean
+        createdAt: String!
+        message: String
+    }
+
+    input GroupInput {
+        name: String!
+        ageAllowance: Int!
+    }
+
+    input GroupEditInput {
+        name: String
+        ageAllowance: Int
+        wins: Int
+        loses: Int
+        draws: Int
+        ranking: Int
+        isInPlayoff: Boolean
+        isArchive: Boolean
+    }
+
     type Coach {
         _id: ID!
         user: User!
@@ -47,8 +79,10 @@ const schemaBuild = buildSchema(`
 
     type RootQuery {
         users: [User!]!
-        coaches: [Coach!]!
         coach(coachId: ID!): Coach!
+        coaches: [Coach!]!
+        group(groupId: ID!): Group!
+        groups: [Group!]!
     }
 
     type RootMutation {
@@ -56,6 +90,10 @@ const schemaBuild = buildSchema(`
         createCoach(coachInput: CoachInput): Coach
         updateCoach(coachId: ID!, coachInput: CouchEditInput): Coach
         deleteCoach(coachId: ID!): Coach
+        createGroup(groupInput: GroupInput): Group
+        updateGroup(groupId: ID!, groupInput: GroupEditInput): Group
+        deleteGroup(groupId: ID!): Group
+
     }
 
     schema {
