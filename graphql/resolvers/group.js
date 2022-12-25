@@ -1,4 +1,5 @@
 import Group from '../../models/group.js';
+import { groupObject } from '../../utils/objectHelper.js';
 
 const groupResolver = {
 	deleteGroup: async (args) => {
@@ -6,11 +7,7 @@ const groupResolver = {
 
 		const group = await Group.findByIdAndDelete(groupId);
 
-		return {
-			...group._doc,
-			createdAt: new Date(group._doc.createdAt).toISOString(),
-			message: 'Deleted',
-		};
+		return groupObject(group, 'Deleted!');
 	},
 	updateGroup: async (args) => {
 		const { groupId, groupInput } = args;
@@ -23,10 +20,7 @@ const groupResolver = {
 			{ new: true }
 		);
 
-		return {
-			...group._doc,
-			createdAt: new Date(group._doc.createdAt).toISOString(),
-		};
+		return groupObject(group);
 	},
 	group: async (groupId) => {
 		const group = await Group.findOne(groupId);
@@ -35,10 +29,7 @@ const groupResolver = {
 			throw new Error(`No Group with the id of ${groupId}`);
 		}
 
-		return {
-			...group._doc,
-			createdAt: new Date(group._doc.createdAt).toISOString(),
-		};
+		return groupObject(group);
 	},
 	groups: async () => {
 		const groups = await Group.find();
@@ -48,10 +39,7 @@ const groupResolver = {
 		}
 
 		return groups.map((group) => {
-			return {
-				...group._doc,
-				createdAt: new Date(group._doc.createdAt).toISOString(),
-			};
+			return groupObject(group);
 		});
 	},
 	createGroup: async (args) => {
@@ -74,10 +62,7 @@ const groupResolver = {
 
 			console.log('TEST', { group });
 
-			return {
-				...result._doc,
-				createdAt: new Date(result._doc.createdAt).toISOString(),
-			};
+			return groupObject(result);
 		} catch (error) {
 			console.log({ error });
 			throw error;

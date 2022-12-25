@@ -1,15 +1,6 @@
 import Coach from '../../models/coach.js';
 import User from '../../models/user.js';
-
-const userHelper = async (userId) => {
-	const user = await User.findById(userId);
-
-	if (!user) {
-		throw new Error(`No user found with id ${userId}`);
-	}
-
-	return { ...user._doc };
-};
+import { coachObject } from '../../utils/objectHelper.js';
 
 const coachResolver = {
 	deleteCoach: async (args) => {
@@ -17,10 +8,7 @@ const coachResolver = {
 
 		const coach = await Coach.findByIdAndDelete(coachId);
 
-		return {
-			...coach._doc,
-			user: userHelper(coach.user),
-		};
+		return coachObject(coach, 'Deleted!');
 	},
 	updateCoach: async (args) => {
 		const { coachId, coachInput } = args;
@@ -33,10 +21,7 @@ const coachResolver = {
 			{ new: true }
 		);
 
-		return {
-			...coach._doc,
-			user: userHelper(coach.user),
-		};
+		return coachObject(coach);
 	},
 	coach: async (coachId) => {
 		const coach = await Coach.findOne(coachId);
@@ -46,21 +31,14 @@ const coachResolver = {
 		if (!coach) {
 			throw new Error(`No Coach with id ${coachId}`);
 		}
-		console.log({ coachId });
 
-		return {
-			...coach._doc,
-			user: userHelper(coach.user),
-		};
+		return coachObject(coach);
 	},
 	coaches: async () => {
 		const coaches = await Coach.find();
 
 		return coaches.map((coach) => {
-			return {
-				...coach._doc,
-				user: userHelper(coach.user),
-			};
+			return coachObject(coach);
 		});
 	},
 	createCoach: async (args) => {
@@ -105,7 +83,7 @@ const coachResolver = {
 				role: result._id,
 			});
 
-			return { ...result._doc, user: userHelper(result.user) };
+			return coachObject(result);
 		} catch (error) {
 			console.log(error);
 			throw error;

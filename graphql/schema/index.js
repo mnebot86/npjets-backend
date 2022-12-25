@@ -2,6 +2,69 @@ import { buildSchema } from 'graphql';
 //TODO: add rosterSize to type Group
 
 const schemaBuild = buildSchema(`
+    type Player {
+        _id: ID!
+        user: User!
+        isCaptain: Boolean
+        name: String!
+        lastName: String!
+        picture: String!
+        jerseyNumber: Int,
+        positions: String,
+        weight: Int!
+        isStriper: Boolean,
+        birthday: String!
+        age: Int!
+        grade: Int!
+        group: Group!
+        registrationPaid: Boolean
+        fundraiserCompleted: Boolean
+        receivedGear: Boolean
+        returnedGear: Boolean,
+        hasAllergy: Boolean,
+        allergyList: [String]!
+        totalAbsence: Int
+        createdAt: String!
+        message: String
+    }
+
+    input PlayerInput {
+        user: ID!
+        name: String!
+        lastName: String!
+        picture: String!
+        weight: Int!
+        birthday: String!
+        age: Int!
+        grade: Int!
+        group: ID!
+        hasAllergy: Boolean,
+        allergyList: [String!]
+    }
+
+    input PlayerEditInput {
+        isCaptain: Boolean
+        name: String
+        lastName: String
+        picture: String
+        jerseyNumber: Int,
+        positions: String,
+        weight: Int
+        isStriper: Boolean,
+        birthday: String
+        age: Int
+        grade: Int
+        group: ID
+        registrationPaid: Boolean
+        fundraiserCompleted: Boolean
+        receivedGear: Boolean
+        returnedGear: Boolean,
+        hasAllergy: Boolean,
+        allergyList: [String]
+        totalAbsence: Int
+        createdAt: String
+    }
+
     type Group {
         _id: ID!
         name: String!
@@ -42,6 +105,7 @@ const schemaBuild = buildSchema(`
         position: String!
         phone: String!
         cleanBGC: Boolean!
+        message: String
     }
 
     input CoachInput {
@@ -69,6 +133,7 @@ const schemaBuild = buildSchema(`
         password: String
         roleType: String!
         role: ID
+        message: String
     }
 
     input UserInput {
@@ -83,6 +148,8 @@ const schemaBuild = buildSchema(`
         coaches: [Coach!]!
         group(groupId: ID!): Group!
         groups: [Group!]!
+        player(playId: ID!): Player!
+        players: [Player!]
     }
 
     type RootMutation {
@@ -93,6 +160,9 @@ const schemaBuild = buildSchema(`
         createGroup(groupInput: GroupInput): Group
         updateGroup(groupId: ID!, groupInput: GroupEditInput): Group
         deleteGroup(groupId: ID!): Group
+        createPlayer(playerInput: PlayerInput): Player
+        updatePlayer(playerId: ID!, playerInput: PlayerEditInput): Player
+        deletePlayer(playerId: ID!): Player
 
     }
 
