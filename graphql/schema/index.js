@@ -2,6 +2,37 @@ import { buildSchema } from 'graphql';
 //TODO: add rosterSize to type Group
 
 const schemaBuild = buildSchema(`
+    type TeamMom {
+        _id: ID!
+        user: User!
+        name: String!
+        lastName: String!
+        picture: String!
+        group: Group!
+        phone: String!
+        cleanBGC: Boolean!
+        message: String
+    }
+
+    input TeamMomInput {
+        user: String!
+        name: String!
+        lastName: String!
+        picture: String!
+        group: String!
+        phone: String!
+    }
+
+    input TeamMomEditInput {
+        user: String
+        name: String
+        lastName: String
+        picture: String
+        group: String
+        phone: String
+        cleanBGC: Boolean
+    }
+
     type Player {
         _id: ID!
         user: User!
@@ -149,7 +180,9 @@ const schemaBuild = buildSchema(`
         group(groupId: ID!): Group!
         groups: [Group!]!
         player(playId: ID!): Player!
-        players: [Player!]
+        players: [Player!]!
+        teamMom(teamMomId: ID!): TeamMom!
+        teamMoms: [TeamMom!]!
     }
 
     type RootMutation {
@@ -163,6 +196,9 @@ const schemaBuild = buildSchema(`
         createPlayer(playerInput: PlayerInput): Player
         updatePlayer(playerId: ID!, playerInput: PlayerEditInput): Player
         deletePlayer(playerId: ID!): Player
+        createTeamMom(teamMomInput: TeamMomInput): TeamMom
+        updateTeamMom(teamMomId: ID!, teamMomInput: TeamMomEditInput): TeamMom
+        deleteTeamMom(teamMomId: ID!): TeamMom
 
     }
 
