@@ -1,5 +1,5 @@
 import { dateHelper } from '../utils/dateHelper.js';
-import { userRef, groupRef } from '../utils/refHelper.js';
+import { userRef, groupRef, playersRef } from '../utils/refHelper.js';
 
 export const playerObject = (player, message) => {
 	return {
@@ -32,6 +32,15 @@ export const teamMomObject = (teamMom, message) => {
 		...teamMom._doc,
 		user: userRef(teamMom._doc.user),
 		group: groupRef(teamMom._doc.group),
+		message: message,
+	};
+};
+
+export const parentObject = (parent, message) => {
+	return {
+		...parent._doc,
+		user: userRef(parent._doc.user),
+		children: playersRef(parent._doc.children),
 		message: message,
 	};
 };

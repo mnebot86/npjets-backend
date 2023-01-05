@@ -60,8 +60,6 @@ const groupResolver = {
 
 			const result = await group.save();
 
-			console.log('TEST', { group });
-
 			return groupObject(result);
 		} catch (error) {
 			console.log({ error });

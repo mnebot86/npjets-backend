@@ -26,8 +26,6 @@ const coachResolver = {
 	coach: async (coachId) => {
 		const coach = await Coach.findOne(coachId);
 
-		console.log('Testing', coach);
-
 		if (!coach) {
 			throw new Error(`No Coach with id ${coachId}`);
 		}

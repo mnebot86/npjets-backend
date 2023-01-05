@@ -8,6 +8,12 @@ const playerSchema = new Schema(
 			type: mongoose.Types.ObjectId,
 			ref: 'User',
 		},
+		parents: [
+			{
+				type: mongoose.Types.ObjectId,
+				ref: 'Parent',
+			},
+		],
 		isCaptain: {
 			type: Boolean,
 			default: false,
