@@ -26,3 +26,12 @@ export const groupObject = (group, message) => {
 		message: message,
 	};
 };
+
+export const teamMomObject = (teamMom, message) => {
+	return {
+		...teamMom._doc,
+		user: userRef(teamMom._doc.user),
+		group: groupRef(teamMom._doc.group),
+		message: message,
+	};
+};
