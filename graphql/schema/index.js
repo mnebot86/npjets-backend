@@ -2,6 +2,33 @@ import { buildSchema } from 'graphql';
 //TODO: add rosterSize to type Group
 
 const schemaBuild = buildSchema(`
+    type Parent {
+        _id: ID!
+        user: User!
+        name: String!
+        lastName: String!
+        picture: String!
+        children: [Player]!
+        phone: String!
+        message: String
+    }
+
+    input ParentInput {
+        user: String!
+        name: String!
+        lastName: String!
+        picture: String!
+        phone: String!
+    }
+
+    input ParentEditInput {
+        name: String
+        lastName: String
+        picture: String
+        children: [ID]
+        phone: String
+    }
+
     type TeamMom {
         _id: ID!
         user: User!
@@ -36,11 +63,12 @@ const schemaBuild = buildSchema(`
     type Player {
         _id: ID!
         user: User!
-        isCaptain: Boolean
+        parents: [Parent]!
+        isCaptain: Boolean!
         name: String!
         lastName: String!
         picture: String!
-        jerseyNumber: Int,
+        jerseyNumber: Int,!
         positions: String,
         weight: Int!
         isStriper: Boolean,
@@ -54,7 +82,7 @@ const schemaBuild = buildSchema(`
         returnedGear: Boolean,
         hasAllergy: Boolean,
         allergyList: [String]!
-        totalAbsence: Int
+        totalAbsence: Int!
         createdAt: String!
         message: String
     }
@@ -62,6 +90,7 @@ const schemaBuild = buildSchema(`
     input PlayerInput {
         user: ID!
         name: String!
+        parents: [ID]!
         lastName: String!
         picture: String!
         weight: Int!
@@ -76,12 +105,13 @@ const schemaBuild = buildSchema(`
     input PlayerEditInput {
         isCaptain: Boolean
         name: String
+        parents: [ID]
         lastName: String
         picture: String
-        jerseyNumber: Int,
-        positions: String,
+        jerseyNumber: Int
+        positions: String
         weight: Int
-        isStriper: Boolean,
+        isStriper: Boolean
         birthday: String
         age: Int
         grade: Int
@@ -89,8 +119,8 @@ const schemaBuild = buildSchema(`
         registrationPaid: Boolean
         fundraiserCompleted: Boolean
         receivedGear: Boolean
-        returnedGear: Boolean,
-        hasAllergy: Boolean,
+        returnedGear: Boolean
+        hasAllergy: Boolean
         allergyList: [String]
         totalAbsence: Int
         createdAt: String
@@ -183,6 +213,8 @@ const schemaBuild = buildSchema(`
         players: [Player!]!
         teamMom(teamMomId: ID!): TeamMom!
         teamMoms: [TeamMom!]!
+        parent(parentId: ID!): Parent!
+        parents: [Parent!]!
     }
 
     type RootMutation {
@@ -199,7 +231,9 @@ const schemaBuild = buildSchema(`
         createTeamMom(teamMomInput: TeamMomInput): TeamMom
         updateTeamMom(teamMomId: ID!, teamMomInput: TeamMomEditInput): TeamMom
         deleteTeamMom(teamMomId: ID!): TeamMom
-
+        createParent(parentInput: ParentInput): Parent
+        updateParent(parentId: ID!, parentInput: ParentEditInput): Parent
+        deleteParent(parentId: ID!): Parent
     }
 
     schema {

@@ -3,6 +3,7 @@ import coachResolver from './coach.js';
 import groupResolver from './group.js';
 import playerResolver from './player.js';
 import teamMomResolver from './teamMom.js';
+import parentResolver from './parent.js';
 
 const rootResolver = {
 	...userResolver,
@@ -10,6 +11,7 @@ const rootResolver = {
 	...groupResolver,
 	...playerResolver,
 	...teamMomResolver,
+	...parentResolver,
 };
 
 export default rootResolver;

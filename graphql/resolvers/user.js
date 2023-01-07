@@ -29,8 +29,6 @@ const userResolver = {
 
 			const result = await user.save();
 
-			console.log({ result });
-
 			return { ...result._doc, password: null };
 		} catch (error) {
 			console.log(error);
