@@ -15,6 +15,7 @@ export const coachObject = (coach, message) => {
 	return {
 		...coach._doc,
 		user: userRef(coach.user),
+		group: groupRef(coach._doc.group),
 		message: message,
 	};
 };

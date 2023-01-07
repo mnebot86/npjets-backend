@@ -20,6 +20,10 @@ const coachSchema = new Schema(
 			type: String,
 			required: [true, 'Please provide image url'],
 		},
+		group: {
+			type: mongoose.Types.ObjectId,
+			ref: 'Group',
+		},
 		position: {
 			type: String,
 			enum: [

@@ -163,6 +163,7 @@ const schemaBuild = buildSchema(`
         name: String!
         lastName: String!
         picture: String!
+        group: Group
         position: String!
         phone: String!
         cleanBGC: Boolean!
@@ -174,6 +175,7 @@ const schemaBuild = buildSchema(`
         name: String!
         lastName: String!
         picture: String!
+        group: ID
         position: String!
         phone: String!
         cleanBGC: Boolean!
@@ -183,6 +185,7 @@ const schemaBuild = buildSchema(`
         name: String
         lastName: String
         picture: String
+        group: ID
         position: String
         phone: String
         cleanBGC: Boolean
