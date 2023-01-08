@@ -2,6 +2,47 @@ import { buildSchema } from 'graphql';
 //TODO: add rosterSize to type Group
 
 const schemaBuild = buildSchema(`
+    type Game {
+        _id: ID!
+        group: Group!
+        homeTeam: String!
+        visitingTeam: String!
+        date: String!
+        time: String!
+        homeScore: Int!
+        visitingScore: Int!
+        location: String!
+        isPlayOffGame: Boolean!
+        isChampionship: Boolean!
+        message: String
+    }
+
+    input GameInput {
+        group: ID!
+        homeTeam: String!
+        visitingTeam: String!
+        date: String!
+        time: String!
+        homeScore: Int
+        visitingScore: Int
+        location: String!
+        isPlayOffGame: Boolean
+        isChampionship: Boolean
+    }
+
+    input GameEditInput {
+        group: ID
+        homeTeam: String
+        visitingTeam: String
+        date: String
+        time: String
+        homeScore: Int
+        visitingScore: Int
+        location: String
+        isPlayOffGame: Boolean
+        isChampionship: Boolean
+    }
+
     type Parent {
         _id: ID!
         user: User!
@@ -130,6 +171,8 @@ const schemaBuild = buildSchema(`
         _id: ID!
         name: String!
         coaches: [Coach]!
+        teamMom: TeamMom
+        games: [Game]!
         ageAllowance: Int!
         wins: Int!
         loses: Int!
@@ -155,6 +198,9 @@ const schemaBuild = buildSchema(`
         ranking: Int
         isInPlayoff: Boolean
         isArchive: Boolean
+        coaches: [ID]
+        teamMom: ID
+        games: [ID]
     }
 
     type Coach {
@@ -218,6 +264,8 @@ const schemaBuild = buildSchema(`
         teamMoms: [TeamMom!]!
         parent(parentId: ID!): Parent!
         parents: [Parent!]!
+        game(gameId: ID!): Game!
+        games: [Game!]!
     }
 
     type RootMutation {
@@ -237,6 +285,9 @@ const schemaBuild = buildSchema(`
         createParent(parentInput: ParentInput): Parent
         updateParent(parentId: ID!, parentInput: ParentEditInput): Parent
         deleteParent(parentId: ID!): Parent
+        createGame(gameInput: GameInput): Game
+        updateGame(gameId: ID!, gameInput: GameEditInput): Game
+        deleteGame(gameId: ID!): Game
     }
 
     schema {

@@ -1,5 +1,11 @@
 import { dateHelper } from '../utils/dateHelper.js';
-import { userRef, groupRef, playersRef } from '../utils/refHelper.js';
+import {
+	userRef,
+	groupRef,
+	playersRef,
+	gamesRef,
+	teamMomRef,
+} from '../utils/refHelper.js';
 
 export const playerObject = (player, message) => {
 	return {
@@ -7,7 +13,7 @@ export const playerObject = (player, message) => {
 		user: userRef(player._doc.user),
 		group: groupRef(player._doc.group),
 		createdAt: dateHelper(player._doc.createdAt),
-		message: message,
+		message,
 	};
 };
 
@@ -16,15 +22,17 @@ export const coachObject = (coach, message) => {
 		...coach._doc,
 		user: userRef(coach.user),
 		group: groupRef(coach._doc.group),
-		message: message,
+		message,
 	};
 };
 
 export const groupObject = (group, message) => {
 	return {
 		...group._doc,
+		games: gamesRef(group._doc.games),
+		teamMom: teamMomRef(group._doc.teamMom),
 		createdAt: new Date(group._doc.createdAt).toISOString(),
-		message: message,
+		message,
 	};
 };
 
@@ -33,7 +41,7 @@ export const teamMomObject = (teamMom, message) => {
 		...teamMom._doc,
 		user: userRef(teamMom._doc.user),
 		group: groupRef(teamMom._doc.group),
-		message: message,
+		message,
 	};
 };
 
@@ -42,6 +50,14 @@ export const parentObject = (parent, message) => {
 		...parent._doc,
 		user: userRef(parent._doc.user),
 		children: playersRef(parent._doc.children),
-		message: message,
+		message,
+	};
+};
+
+export const gameObject = (game, message) => {
+	return {
+		...game._doc,
+		group: groupRef(game._doc.group),
+		message,
 	};
 };

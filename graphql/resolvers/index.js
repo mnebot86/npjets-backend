@@ -4,6 +4,7 @@ import groupResolver from './group.js';
 import playerResolver from './player.js';
 import teamMomResolver from './teamMom.js';
 import parentResolver from './parent.js';
+import gameResolver from './game.js';
 
 const rootResolver = {
 	...userResolver,
@@ -12,6 +13,7 @@ const rootResolver = {
 	...playerResolver,
 	...teamMomResolver,
 	...parentResolver,
+	...gameResolver,
 };
 
 export default rootResolver;
