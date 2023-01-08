@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
-//TODO: Added Group ID
 
 const coachSchema = new Schema(
 	{

@@ -1,8 +1,5 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
-//TODO: Added Group ID
-//TODO: Added Games ID
-//TODO: Added TeamMom ID
 //TODO: Added Roster ID
 //TODO: Added Roster Size
 
@@ -32,6 +29,10 @@ const groupSchema = new Schema(
 			],
 			validate: [coachLimit, 'Max number of {coaches}'],
 		},
+		teamMom: {
+			type: mongoose.Types.ObjectId,
+			ref: 'TeamMom',
+		},
 		ageAllowance: {
 			type: Number,
 			required: [true, 'Please provide age range'],
@@ -56,6 +57,12 @@ const groupSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
+		games: [
+			{
+				type: mongoose.Types.ObjectId,
+				ref: 'Game',
+			},
+		],
 		isArchive: {
 			type: Boolean,
 			default: false,
